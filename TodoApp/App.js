@@ -12,11 +12,22 @@ import TodoList from './components/TodoList';
 
 function App() {
   const today = new Date();
-  const [todos, setTodos] = useState([
+  const [topos, setTopos] = useState([
     {id: 1, text: '작업환경 설정', done: true},
     {id: 2, text: '리액트 네이티브 기초 공부', done: false},
     {id: 3, text: '투두리스트 만들어보기', done: false},
   ]);
+
+  const onInsert = text => {
+    const nextId =
+      topos.length > 0 ? Math.max(...topos.map(todo => todo.id)) + 1 : 1;
+    const todo = {
+      id: nextId,
+      text,
+      done: false,
+    };
+    setTopos(topos.concat(todo));
+  };
 
   return (
     <SafeAreaView style={styles.block}>
@@ -24,8 +35,8 @@ function App() {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.avoid}>
         <DateHead date={today} />
-        {todos.length === 0 ? <Empty /> : <TodoList todos={todos} />}
-        <AddTodo />
+        {topos.length === 0 ? <Empty /> : <TodoList topos={topos} />}
+        <AddTodo onInsert={onInsert} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
