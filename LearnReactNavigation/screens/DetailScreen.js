@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 function DetailScreen() {
     return (
         <View>
-            <Text>Detail</Text>
+            <Text>Detail22</Text>
         </View>
     );
 }
